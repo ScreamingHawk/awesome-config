@@ -387,7 +387,7 @@ awful.rules.rules = {
     { rule = { name = "Pidgin" },
       properties = { tag = tags[1][3] } },
     -- Set Facebook Messenger to always map on tag 3 screen 1. 
-    { rule = { name = "Facebook-Messenger" },
+    { rule = { name = "Messenger for Desktop" },
       properties = { tag = tags[1][3] } },
     -- Set PyCharm to always map on tag 4 screen 1.
     { rule = { class = "PyCharm" },
@@ -486,6 +486,7 @@ run_once("nm-applet") -- wifi icon
 run_once("volumeicon") -- volume icon
 run_once("xscreensaver -no-splash") -- screen lock
 run_once("numlockx on") -- numpad on
-run_once("xinput --disable 12") -- disable trackpad
+--run_once("xinput --disable 11") -- disable trackpad -- trackpad isn't always 11
+--run_once("unclutter -idle 1.0 -root") -- hide mouse icon after 1 second inactive -- causes screen flashing
 
 --}}}
