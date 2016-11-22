@@ -42,12 +42,12 @@ end
 -- {{{ Variable definitions
 -- Themes define colours, icons, font and wallpapers.
 --beautiful.init("/usr/share/awesome/themes/default/theme.lua") -- Default
-local theme_name = "holo" -- Favourite
+theme_name = "holo" -- Favourite
 theme_name = "milky-taste" -- Override
 beautiful.init(awful.util.getdir("config") .. "/themes/" .. theme_name .. "/theme.lua")
 
 -- This is used later as the default terminal and editor to run.
-terminal = "x-terminal-emulator"
+--terminal = "x-terminal-emulator"
 terminal = "gnome-terminal"
 editor = os.getenv("EDITOR") or "editor"
 editor_cmd = terminal .. " -e " .. editor
