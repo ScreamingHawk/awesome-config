@@ -90,7 +90,7 @@ end
 tags = {}
 for s = 1, screen.count() do
     -- Each screen has its own tag table.
-    tags[s] = awful.tag({ 'console', 'web', 'chat', 'ide', 'free' }, s, layouts[1])
+    tags[s] = awful.tag({ 'console', 'web', 'ide', 'chat', 'free' }, s, layouts[1])
 end
 -- }}}
 
@@ -119,6 +119,20 @@ menubar.utils.terminal = terminal -- Set the terminal for applications that requ
 -- {{{ Wibox
 -- Create a textclock widget
 mytextclock = awful.widget.textclock()
+
+-- Create battery widget
+batterywidget = wibox.widget.textbox()
+batterywidget:set_text(" | Battery | ")
+batterywidgettimer = timer({ timeout = 5 })
+batterywidgettimer:connect_signal("timeout",
+    function()
+--        fh = assert(io.popen("acpi | cut -d, -f 2,3 -", "r")) -- With time remaining
+        fh = assert(io.popen("acpi | cut -d, -f 2 -", "r")) -- Without time remaining
+        batterywidget:set_text(" |" .. fh:read("*l") .. " | ")
+        fh:close()
+    end
+)
+batterywidgettimer:start()
 
 -- Create a wibox for each screen and add it
 mywibox = {}
@@ -199,6 +213,7 @@ for s = 1, screen.count() do
     -- Widgets that are aligned to the right
     local right_layout = wibox.layout.fixed.horizontal()
     if s == 1 then right_layout:add(wibox.widget.systray()) end
+    right_layout:add(batterywidget)
     right_layout:add(mytextclock)
     right_layout:add(mylayoutbox[s])
 
@@ -383,15 +398,15 @@ awful.rules.rules = {
     -- Set Firefox to always map on tag 2 screen 1.
     { rule = { class = "Firefox" },
       properties = { tag = tags[1][2] } },
-    -- Set Pidgin to always map on tag 3 screen 1. 
+    -- Set Pidgin to always map on tag 4 screen 1. 
     { rule = { name = "Pidgin" },
-      properties = { tag = tags[1][3] } },
-    -- Set Facebook Messenger to always map on tag 3 screen 1. 
-    { rule = { name = "Messenger for Desktop" },
-      properties = { tag = tags[1][3] } },
-    -- Set PyCharm to always map on tag 4 screen 1.
-    { rule = { class = "PyCharm" },
       properties = { tag = tags[1][4] } },
+    -- Set Facebook Messenger to always map on tag 4 screen 1. 
+    { rule = { name = "Messenger for Desktop" },
+      properties = { tag = tags[1][4] } },
+    -- Set PyCharm to always map on tag 3 screen 1.
+    { rule = { class = "PyCharm" },
+      properties = { tag = tags[1][3] } },
 }
 -- }}}
 
@@ -486,7 +501,7 @@ run_once("nm-applet") -- wifi icon
 run_once("volumeicon") -- volume icon
 run_once("xscreensaver -no-splash") -- screen lock
 run_once("numlockx on") -- numpad on
---run_once("xinput --disable 11") -- disable trackpad -- trackpad isn't always 11
+run_once("xinput --disable 1") -- disable trackpad -- WARNING trackpad isn't always 12
 --run_once("unclutter -idle 1.0 -root") -- hide mouse icon after 1 second inactive -- causes screen flashing
 
 --}}}
