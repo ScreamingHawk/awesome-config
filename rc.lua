@@ -501,7 +501,6 @@ run_once("nm-applet") -- wifi icon
 run_once("volumeicon") -- volume icon
 run_once("xscreensaver -no-splash") -- screen lock
 run_once("numlockx on") -- numpad on
-run_once("xinput --disable 1") -- disable trackpad -- WARNING trackpad isn't always 12
---run_once("unclutter -idle 1.0 -root") -- hide mouse icon after 1 second inactive -- causes screen flashing
+run_once("xinput --disable 11") -- disable trackpad -- WARNING trackpad isn't always 11
 
 --}}}
