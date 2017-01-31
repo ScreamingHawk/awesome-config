@@ -501,6 +501,6 @@ run_once("nm-applet") -- wifi icon
 run_once("volumeicon") -- volume icon
 run_once("xscreensaver -no-splash") -- screen lock
 run_once("numlockx on") -- numpad on
-run_once("xinput --disable 11") -- disable trackpad -- WARNING trackpad isn't always 11
+run_once("xinput --disable $(xinput | grep TouchPad | cut -f2 | sed '$s/id=//')") -- disable 'TouchPad'
 
 --}}}
