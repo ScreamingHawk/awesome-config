@@ -298,7 +298,8 @@ globalkeys = awful.util.table.join(
     awful.key({ modkey }, "p", function() menubar.show() end),
 
     -- Programs
-    awful.key({ modkey, "Control" }, "l", function() awful.util.spawn("xscreensaver-command -lock") end)
+    awful.key({ modkey, "Control" }, "l", function() awful.util.spawn("xscreensaver-command -lock") end),
+    awful.key({}, "Print", function() awful.util.spawn("capscr", false) end)
 )
 
 clientkeys = awful.util.table.join(
